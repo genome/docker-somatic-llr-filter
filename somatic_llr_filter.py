@@ -290,10 +290,15 @@ def main(args_input = sys.argv[1:]):
 
         #TODO parse out per alt, retrieve calls
         call = []
-        for i in range(1,(len(alts)+1)):
+        for i in range(1,(len(alts)+1)):  #right now, this will only ever be one, due to above check.  Could be expanded to support multiple alleles - see above
             normal_var = ad_nrm[i]
             tumor_var = ad_tum[i]
-
+            
+            #if neither has any depth, then fail this up front
+            if tumor_depth + normal_depth == 0:
+                (llr,call) = (0,"Reference")
+                continue
+            
             #weighted average of the frequencies
             error_expect = (tumor_var + normal_var)/(tumor_depth + normal_depth)
             #dave had this line in there, but I don't know why...
