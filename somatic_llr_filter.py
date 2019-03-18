@@ -278,8 +278,13 @@ def main(args_input = sys.argv[1:]):
         def getFormatField(sample_name, field_name):
             if(sample_name in entry.call_for_sample and field_name in entry.call_for_sample[sample_name].data):
                 return entry.call_for_sample[sample_name].data[field_name]
-            raise Exception("Field {} missing in an entry for Sample {}".format(field_name, sample_name))
+            return("NA")
 
+        def missingVals(arr):
+            for i in arr:
+                if i == "NA":
+                    return True
+            return False
 
         ad_nrm = getFormatField(args.normal_sample_name,args.allele_depth_field)
         ad_tum = getFormatField(args.tumor_sample_name,args.allele_depth_field)
@@ -288,14 +293,16 @@ def main(args_input = sys.argv[1:]):
         normal_ref = ad_nrm[0]
         tumor_ref = ad_tum[0]
 
+        call = ""
+        llr = 0
+
         #TODO parse out per alt, retrieve calls
-        call = []
         for i in range(1,(len(alts)+1)):  #right now, this will only ever be one, due to above check.  Could be expanded to support multiple alleles - see above
             normal_var = ad_nrm[i]
             tumor_var = ad_tum[i]
             
-            #if neither has any depth, then fail this up front
-            if tumor_depth + normal_depth == 0:
+            #if neither has any depth or vals or missing, then fail this up front
+            if missingVals([normal_var,tumor_var,tumor_depth,normal_depth]) or (tumor_depth + normal_depth == 0):
                 (llr,call) = (0,"Reference")
                 continue
             
