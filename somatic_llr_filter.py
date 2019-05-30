@@ -299,13 +299,13 @@ def main(args_input = sys.argv[1:]):
         #TODO parse out per alt, retrieve calls
         for i in range(1,(len(alts)+1)):  #right now, this will only ever be one, due to above check.  Could be expanded to support multiple alleles - see above
             if(ad_nrm == "NA"):
-		normal_var = "NA"
-	    else:
-		normal_var = ad_nrm[i]
-	    if(ad_tum == "NA"):
-		tumor_var = "NA"
-	    else:
-		tumor_var = ad_tum[i]
+                normal_var = "NA"
+            else:
+                normal_var = ad_nrm[i]
+            if(ad_tum == "NA"):
+                tumor_var = "NA"
+            else:
+                tumor_var = ad_tum[i]
             
             #if neither has any depth or vals or missing, then fail this up front
             if missingVals([normal_var,tumor_var,tumor_depth,normal_depth]) or (tumor_depth + normal_depth == 0):
