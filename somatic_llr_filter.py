@@ -288,7 +288,7 @@ def main(args_input = sys.argv[1:]):
 
         ad_nrm = getFormatField(args.normal_sample_name,args.allele_depth_field)
         ad_tum = getFormatField(args.tumor_sample_name,args.allele_depth_field)
-        normal_depth = getFormatField(args.tumor_sample_name,args.site_depth_field)
+        normal_depth = getFormatField(args.normal_sample_name,args.site_depth_field)
         tumor_depth = getFormatField(args.tumor_sample_name,args.site_depth_field)
         normal_ref = ad_nrm[0]
         tumor_ref = ad_tum[0]
