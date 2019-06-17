@@ -319,7 +319,12 @@ def main(args_input = sys.argv[1:]):
             if error_expect == 1:
                 error_expect = 1 - args.sequence_error_rate
 
-            tumor_freq = tumor_var/tumor_depth
+            #handle case where depth is zero or missing
+            if tumor_depth == 0:
+                tumor_freq = 0
+            else:
+                tumor_freq = tumor_var/tumor_depth
+
             if tumor_freq == 0:
                 tumor_freq = args.sequence_error_rate
             elif tumor_freq == 1:
