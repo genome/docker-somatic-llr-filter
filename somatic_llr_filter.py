@@ -344,7 +344,7 @@ def main(args_input = sys.argv[1:]):
         #do filtering if specified
         if args.llr_threshold is not None:
             if (not call == "Somatic") or (llr < args.llr_threshold):
-                entry.FILTER.append(args.filter_field);
+                entry.add_filter(args.filter_field);
 
         vcf_writer.write_record(entry)
 
