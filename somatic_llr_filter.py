@@ -153,7 +153,7 @@ def create_vcf_writer(args, vcf_reader):
                 vcf_reader.close()
                 raise Exception("FILTER {} already exists. Choose a different --filter-field, or use the --overwrite flag to retain this filter description and overwrite values".format(args.filter_field))
         else:
-            od = OrderedDict([('ID', args.filter_field), ('Description', 'Is a somatic mutation with LLR greater than {}'.format(args.llr_threshold))])
+            od = OrderedDict([('ID', args.filter_field), ('Description', 'Is a somatic mutation with LLR lower than {}'.format(args.llr_threshold))])
             new_header.add_filter_line(od)
 
 
